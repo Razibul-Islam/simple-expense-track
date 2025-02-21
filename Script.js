@@ -1,13 +1,11 @@
 let Deposit = document.getElementById("deposit");
 let Withdrow = document.getElementById("withdraw");
 let Balance = document.getElementById("balance");
-let Form = document.getElementById("form");
 let Text = document.getElementById("text");
 let Amount = document.getElementById("amount");
 let List = document.getElementById("list");
 
-// Form manopulation
-// Diposit
+// Transiction details
 let datas = [];
 
 // UI Update
@@ -21,49 +19,70 @@ function updateUI() {
   });
 }
 
+// Deposit Function
 function Diposit() {
   event.preventDefault();
   let TextValue = Text.value;
-  let AmountValue = Amount.value;
+  let AmountValue = Number(Amount.value);
+
+  if (TextValue === "") {
+    let dates = new Date();
+    let year = dates.getFullYear();
+    let month = dates.getMonth();
+    let day = dates.getDate();
+    TextValue = `${year}-${month + 1}-${day}`;
+  }
 
   if (parseInt(AmountValue) < 100) {
     alert("Minimum value is 100");
     return;
   }
-  datas.push({ TextValue, AmountValue, type: "Diposit" });
 
-  let DepositValue = Deposit.innerText;
-  let BalanceValue = Balance.innerText;
+  datas.push({ TextValue, AmountValue: AmountValue, type: "Diposit" });
 
-  let newDepositValue = parseInt(DepositValue) + parseInt(AmountValue);
-  let newBalanceValue = parseInt(BalanceValue) + parseInt(AmountValue);
+  let DepositValue = Number(Deposit.innerText);
+  let BalanceValue = Number(Balance.innerText);
+
+  let newDepositValue = DepositValue + AmountValue;
+  let newBalanceValue = BalanceValue + AmountValue;
 
   Deposit.innerText = newDepositValue;
   Balance.innerText = newBalanceValue;
   updateUI();
 }
+
+// Withdraw Function
 function Withdraw() {
   event.preventDefault();
   let TextValue = Text.value;
-  let AmountValue = Amount.value;
+  let AmountValue = Number(Amount.value);
 
-  if (parseInt(AmountValue) < 100) {
+  if (TextValue === "") {
+    let dates = new Date();
+    let year = dates.getFullYear();
+    let month = dates.getMonth();
+    let day = dates.getDate();
+    TextValue = `${year}-${month + 1}-${day}`;
+  }
+
+  if (AmountValue < 100) {
     alert("Minimum Withdraw value is $100");
     return;
   }
 
   let currentBalance = parseInt(Balance.innerText);
-  if (parseInt(AmountValue) > currentBalance) {
+  if (AmountValue > currentBalance) {
     alert("Your account do not have balance");
     return;
   }
+
   datas.push({ TextValue, AmountValue, type: "Withdraw" });
 
-  let WithdrawValue = Withdrow.innerText;
-  let BalanceValue = Balance.innerText;
+  let WithdrawValue = Number(Withdrow.innerText);
+  let BalanceValue = Number(Balance.innerText);
 
-  let newWithdrawValue = parseInt(WithdrawValue) + parseInt(AmountValue);
-  let newBalanceValue = parseInt(BalanceValue) - parseInt(AmountValue);
+  let newWithdrawValue = WithdrawValue + AmountValue;
+  let newBalanceValue = BalanceValue - AmountValue;
 
   Balance.innerText = newBalanceValue;
   Withdrow.innerText = newWithdrawValue;
