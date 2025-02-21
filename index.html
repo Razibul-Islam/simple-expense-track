@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Expense Tracker</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        <div class="history-container">
+            <div class="deposit-container">
+                <h2>Total Deposit</h2>
+                <h2 id="deposit">0</h2>
+            </div>
+            <div class="withdraw-container">
+                <h2>Total Withdraw</h2>
+                <h2 id="withdraw">0</h2>
+            </div>
+            <div class="balance-container">
+                <h2>Total Balance</h2>
+                <h2 id="balance">0</h2>
+            </div>
+        </div>
+
+        <h3>Add new transaction</h3>
+        <form id="form">
+            <div class="form-control">
+                <label for="text">Text</label>
+                <input type="text" id="text" placeholder="Enter text...">
+            </div>
+            <div class="form-control">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" placeholder="Enter amount..." />
+            </div>
+            <div class="btn-container">
+                <button onclick="Diposit()" class="btn-deposit">Deposit</button>
+                <button onclick="Withdraw()" class="btn-withdraw">Withdraw</button>
+            </div>
+        </form>
+        <h3>History</h3>
+        <ul id="list" class="list">
+        </ul>
+    </div>
+    <script src="Script.js"></script>
+</body>
+
+</html>
